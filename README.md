@@ -8,6 +8,8 @@
 
 [Data Schema from Angelo](https://docs.google.com/document/d/12DPXRQn29HHXUZN69DYoJISuBVaJ5VF-D_EGP8muBOA/edit?usp=sharing)
 
+[Git Workflow Template](https://hackmd.io/@9fOPzjfpQ6-A61nMUwe76w/SkOW2RLma)
+
 ## Database Build-up
 1. 打开 MySQL Workbench。
 2. 连接到你的 MySQL 实例。
