@@ -1,3 +1,4 @@
+
 """
 Django settings for RateMyRental project.
 
@@ -74,10 +75,16 @@ WSGI_APPLICATION = 'RateMyRental.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# please change the NAME to your SQL connection name
+# please change PASSWORD to your SQL password
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rate_my_rental',
+        'USER': 'root',
+        'PASSWORD': 'd4fe0e88',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
