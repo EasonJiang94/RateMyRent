@@ -9,10 +9,6 @@ body, h1, p {
     margin: 0;
 }
 
-ul {
-    list-style-type: none;
-}
-
 /* Full screen body and html to make sure the hero image covers full screen */
 html, body {
     height: 100%;
@@ -20,7 +16,7 @@ html, body {
 }
 
 .navbar {
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(113, 113, 113, 0.5); 
     color: rgb(255, 255, 255);
     position: absolute;
     width: 100%;
@@ -107,54 +103,6 @@ html, body {
     border-radius: 4px; /* Optional: Rounds the corners of your images */
 }
 
-.salesman_ranking{
-    text-align: center;
-    font-size: 24px;
-    margin: 50px; 
-}
-
-.salesman_ranking_subtitle{
-    font-size: 20px;
-    color: #555;
-}
-
-.salesman_ranking_title{
-    padding-bottom: 30px;
-}
-
-/*------------------------*/
-
-.card-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Adjust the space between cards as needed */
-    padding-bottom: 50px;
-}
-
-.card {
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* This adds the shadow effect */
-    padding: 20px;
-    border-radius: 4px; /* Optional: Rounds the corners of the card */
-    background-color: white; /* Assuming a white background for the card */
-}
-
-.profile-pic {
-    width: 60px; /* Adjust size as needed */
-    height: 60px;
-    background-color: #C4C4C4; /* Placeholder for the grey circle */
-    border-radius: 50%; /* Makes the div a circle */
-    margin-right: 20px; /* Adjust the space between the circle and the text as needed */
-}
-
-.card-content h2 {
-    margin: 0;
-    margin-bottom: 5px; /* Adjust the space between the name and email as needed */
-    font-size: 20px; /* Adjust font size as needed */
-}
-
-.card-content p {
-    margin: 0;
-    font-size: 16px; /* Adjust font size as needed */
+.ranking_items{
+    color: aqua;
 }
