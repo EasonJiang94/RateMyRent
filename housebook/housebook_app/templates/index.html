@@ -40,5 +40,22 @@
             <!-- Add more images as needed -->
         </div>
     </section>
+    <section class="salesman_ranking">
+        <div>
+            <h3 class="salesman_ranking_subtitle">We are professional dream catchers</h3>
+            <h2 class="salesman_ranking_title">Meet Our Top Salesman!</h2>
+        </div>
+        <div class="card-container">
+            <!-- Cards for Salesman -->
+            {% for x in salesman_list %}
+            <div class="card">
+                <div class="profile-pic"></div>
+                <div class="card-content">
+                    <h2>{{ x.first_name }} {{ x.last_name }}</h2>
+                    <p>Reach out to me: 12345@gmail.com</p>
+                </div>
+            </div>
+            {% endfor %}
+    </section>
 </body>
 </html>
