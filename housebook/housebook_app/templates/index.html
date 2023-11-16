@@ -40,5 +40,15 @@
             <!-- Add more images as needed -->
         </div>
     </section>
+    <section>
+        <div>
+            <h2>All Salesman</h2>
+            <ul>
+                {% for x in salesman_list %}
+                <li>{{ x.first_name }} {{ x.last_name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
