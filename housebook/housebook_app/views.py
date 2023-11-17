@@ -13,4 +13,8 @@ def housebook_app(request):
     'salesman_list': salesman_list,
   }
     return HttpResponse(template.render(context, request))
+
+def dashboard(request):
+    template = loader.get_template('dashboard.html')
+    return HttpResponse(template.render())
     
