@@ -13,41 +13,22 @@
                 <div class="logo">HOUSEBOOK</div>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-links-item">ABOUT US</a></li>
-                    <li><a href="dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
                     <li><a href="#" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
                 </ul>
             </div>
         </nav>
     </header>
-
-    <main>
-        <section class="hero">
-            <p>Housebook can help you</p>
-            <h1>Find your forever home</h1>
-            <!-- Content based on the image provided -->
-        </section>
-    </main>
     <section class="property-board">
         <div class="heading">
-            <h2>Find your dream house here!</h2>
-            <h1>Property Board</h1>
+            <h1>Property List</h1>
         </div>
         <div class="listings">
             <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 1" class="listing-image">
             <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 2" class="listing-image">
             <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 3" class="listing-image">
             <!-- Add more images as needed -->
-        </div>
-    </section>
-    <section>
-        <div>
-            <h2>All Salesman</h2>
-            <ul>
-                {% for x in salesman_list %}
-                <li>{{ x.first_name }} {{ x.last_name }}</li>
-                {% endfor %}
-            </ul>
         </div>
     </section>
 </body>
