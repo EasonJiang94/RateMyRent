@@ -13,7 +13,7 @@
                 <div class="logo">HOUSEBOOK</div>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-links-item">ABOUT US</a></li>
-                    <li><a href="#" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
                     <li><a href="#" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
                 </ul>
@@ -47,12 +47,13 @@
         </div>
         <div class="card-container">
             <!-- Cards for Salesman -->
-            {% for x in salesman_list %}
+            {% for y in salesman_transactions %}
             <div class="card">
                 <div class="profile-pic"></div>
                 <div class="card-content">
-                    <h2>{{ x.first_name }} {{ x.last_name }}</h2>
-                    <p>Reach out to me: 12345@gmail.com</p>
+                    <h2>{{ y.user__first_name }} {{ y.user__last_name }}</h2>
+                    <p>Reach out to me: {{ y.user__user_email}}</p>
+                    <p>Transactions made: {{ y.transaction_count }}</p>
                 </div>
             </div>
             {% endfor %}

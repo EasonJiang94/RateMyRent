@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real Estate Website</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">HOUSEBOOK</div>
+                <ul class="nav-links">
+                    <li><a href="/" class="nav-links-item">HOME</a></li>
+                    <li><a href="#" class="nav-links-item">ABOUT US</a></li>
+                    <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                    <!-- Add other navigation links here -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="property-board">
+        <div class="heading">
+            <h1>Property List</h1>
+        </div>
+        <div class="listings">
+            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 1" class="listing-image">
+            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 2" class="listing-image">
+            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 3" class="listing-image">
+            <!-- Add more images as needed -->
+        </div>
+    </section>
+</body>
+</html>
