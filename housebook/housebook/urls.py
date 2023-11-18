@@ -22,4 +22,8 @@ urlpatterns = [
     path('', include('housebook_app.urls')),
     path('admin/', admin.site.urls),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('add_property/', views.add_property, name='add_property'),
 ]
+
+
+

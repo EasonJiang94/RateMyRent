@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property Add Form</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">HOUSEBOOK</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-links-item">ABOUT US</a></li>
+                    <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                    <!-- Add other navigation links here -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="add-property-board">
+        <form id="propertyForm" action="{% url 'add_property' %}" method="POST">
+            {% csrf_token %}
+            <label for="propertyId">Property ID:</label>
+            <input type="text" id="propertyId" name="property_id" required>
+    
+            <label for="propertyName">Property Name:</label>
+            <input type="text" id="propertyName" name="property_name" maxlength="30" required>
+    
+            <label for="propertyType">Property Type:</label>
+            <input type="text" id="propertyType" name="property_type" maxlength="30" required>
+    
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" name="zipcode" required>
+    
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" maxlength="30" required>
+    
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" maxlength="10" required>
+    
+            <button type="submit">Submit</button>
+            <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>
