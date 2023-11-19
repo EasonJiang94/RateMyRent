@@ -122,7 +122,7 @@ html, body {
     padding-bottom: 30px;
 }
 
-/*------------------------*/
+/* cards for salesman */
 
 .card-container {
     display: flex;
@@ -157,4 +157,54 @@ html, body {
 .card-content p {
     margin: 0;
     font-size: 16px; /* Adjust font size as needed */
+}
+
+/* Cards for property sections */
+
+.card-container-property {
+    max-width: 100%; /* Maximum width is the full width of the viewport */
+}
+
+.card-property {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.card-content-property {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-content-property h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.details-link-property {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.image-container-property {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.image-property {
+    width: 300px;
+    height: 300px;
+    background-image: url('sample_house.jpg');
+    margin-right: 10px;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-property:last-child {
+    margin-right: 0;
 }
