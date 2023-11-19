@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'django.template.context_processors.media',
             ],
         },
     },
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'housebook',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': '03270327',
         'HOST':'localhost',
         'PORT':'3306',
     }
@@ -125,6 +126,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     "/var/www/static/",
 ]
+
+# Database Images
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'pictures').replace('\\', '/')  # 设置静态文件路径为主目录下的media文件夹
+#MEDIA_URL = '/pictures/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
