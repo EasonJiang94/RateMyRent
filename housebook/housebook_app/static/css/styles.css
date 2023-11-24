@@ -167,7 +167,7 @@ button:hover {
 
 
 #dashboard-container{
-    max-width: 1200px; /* Adjust the max width as needed */
+    max-width: 600px; /* Adjust the max width as needed */
     margin: auto; /* Center the container */
 }
 
@@ -206,3 +206,9 @@ button:hover {
     border: 1px solid #ddd; 
     margin-bottom: 15px; 
   }
+
+  .dashboard-img-container-property {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}

@@ -29,21 +29,23 @@
         </div>
         
     </section>
-    <section class="dashboard-container">
-        <div class="container" id="dashboard-container">
-            <div class="property-row">
-                {% for x in property_data %}
-                <div class="box">
-                    <a href="{% url 'edit_property' x.property_id %}">
-                        <img src="/static/{{ x.image }}" alt="{{ x.property_name }}" class="listing-image">
-                    </a>
-                    <p>{{ x.property_name }} </p>
-                    <p>{{ x.property_type }} </p>
-                    <p>{{ x.city }}</p>
-                    <p>{{ x.zipcode }}</p>
-                </div>
-                {% endfor %}
+    <section class="property-board">
+        <div class="card-container" id="dashboard-container">
+          <div class="card-property">
+            {% for x in property_data %}
+            <div class="image-container-property">
+              <a href="{% url 'edit_property' x.property_id %}">
+                  <img src="/static/{{ x.image }}" alt="{{ x.property_name }}" class="listing-image">
+              </a>
             </div>
+            <div class="content-property">
+                <p>{{ x.property_name }} </p>
+                <p>{{ x.property_type }} </p>
+                <p>{{ x.city }}</p>
+                <p>{{ x.zipcode }}</p>
+            </div>
+            {% endfor %}
+          </div>
         </div>
     </section>
 </body>

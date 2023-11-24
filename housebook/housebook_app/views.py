@@ -71,15 +71,3 @@ def edit_property(request, property_id):
     }
             
     return render(request, 'edit_property.html' , context)
-
- # property_data = Property.objects.raw("""
-        #         SELECT property_id,
-        #             property_name,
-        #             property_type,
-        #             zipcode,
-        #             city,
-        #             state,
-        #             image
-        #         FROM property p1
-        #         JOIN propertyItemImages p2 ON p1.property_id = p2.item_id
-        #         WHERE p1.property_id = %s """, [pty_id])
