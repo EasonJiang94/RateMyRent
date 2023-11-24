@@ -25,6 +25,12 @@ def housebook_app(request):
     
     # Retrieve property info
     property_basic_info=Property.objects.all()[:3]
+    
+    # Retrieve property id
+    property_id=list(Property.objects.values_list('property_id', flat=True))
+
+    # set property_id as argument that will be passed
+    # request.session['argument']=property_id
 
     template = loader.get_template('index.html')
     context = {
@@ -33,9 +39,24 @@ def housebook_app(request):
   }
     return HttpResponse(template.render(context, request))
 
+def property_details(request, argument):
+    # receive argument from template
+    p = Property.objects.get(property_id=argument)
+
+    context = {
+        'property':p,
+    }
+    #return render(request, 'property_details.html', {'argument': argument})
+    return render(request, 'property_details.html', context)
+
+
+
 def dashboard(request):
     template = loader.get_template('dashboard.html')
     return HttpResponse(template.render())
+
+
+
 def add_property(request):
     if request.method == 'POST':
         new_property = Property(
