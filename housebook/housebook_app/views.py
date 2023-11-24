@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Count
 from .models import Property
+from .models import Propertyaddress
+from .models import Propertyitem
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -38,8 +40,14 @@ def property_details(request, argument):
     # find a property that fit property_id=argument from template
     p = Property.objects.get(property_id=argument)
 
+    # get property item & property address
+    p_item = Propertyitem.objects.get(property=argument)
+    p_address = Propertyaddress.objects.get(address_id=argument)
+
     context = {
         'property':p,
+        'property_item':p_item,
+        'property_address':p_address,
     }
     
     return render(request, 'property_details.html', context)
