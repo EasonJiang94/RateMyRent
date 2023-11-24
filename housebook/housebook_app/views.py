@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Users
 from .models import Salesman
-from .models import Transactions
-from .models import Property
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.db.models import Count
+from .models import Property
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -32,7 +33,37 @@ def housebook_app(request):
   }
     return HttpResponse(template.render(context, request))
 
+def property_details(request, argument):
+    # receive argument from template
+    # find a property that fit property_id=argument from template
+    p = Property.objects.get(property_id=argument)
+
+    context = {
+        'property':p,
+    }
+    
+    return render(request, 'property_details.html', context)
+
+
+
 def dashboard(request):
     template = loader.get_template('dashboard.html')
     return HttpResponse(template.render())
-    
+
+
+
+def add_property(request):
+    if request.method == 'POST':
+        new_property = Property(
+            property_id=request.POST['property_id'],
+            property_name=request.POST['property_name'],
+            property_type=request.POST['property_type'],
+            zipcode=request.POST['zipcode'],
+            city=request.POST['city'],
+            state=request.POST['state'],
+        )
+        new_property.save()  # Save the new Property to the database
+        return redirect('dashboard')
+    else:
+        return render(request, 'add_property.html')
+
