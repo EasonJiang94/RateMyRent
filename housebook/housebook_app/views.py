@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Users
@@ -51,8 +51,10 @@ def add_property(request):
     
 def edit_property(request, property_id):
 
+    property_data = Property.objects.get(property_id=property_id)
+
     if request.method == 'POST':
-        new_property = Property(
+        property_data = Property(
             property_id=request.POST['property_id'],
             property_name=request.POST['property_name'],
             property_type=request.POST['property_type'],
@@ -60,22 +62,24 @@ def edit_property(request, property_id):
             city=request.POST['city'],
             state=request.POST['state'],
         )
-        new_property.save()  # Save the new Property to the database
+        property_data.save()  # Save the new Property to the database
 
         return redirect('dashboard')
-    else:
+    
+    context = {
+        'property':property_data,
+    }
+            
+    return render(request, 'edit_property.html' , context)
 
-        property_data = Property.objects.raw("""
-                SELECT property_id,
-                    property_name,
-                    property_type,
-                    zipcode,
-                    city,
-                    state,
-                    image
-                FROM property p1
-                JOIN propertyItemImages p2 ON p1.property_id = p2.item_id
-                WHERE p1.property_id = %s """, [property_id])
-
-        return render(request, 'edit_property.html' , {'property_data': property_data})
-
+ # property_data = Property.objects.raw("""
+        #         SELECT property_id,
+        #             property_name,
+        #             property_type,
+        #             zipcode,
+        #             city,
+        #             state,
+        #             image
+        #         FROM property p1
+        #         JOIN propertyItemImages p2 ON p1.property_id = p2.item_id
+        #         WHERE p1.property_id = %s """, [pty_id])
