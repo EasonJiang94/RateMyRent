@@ -33,22 +33,40 @@
             <h2>Find your dream house here!</h2>
             <h1>Property Board</h1>
         </div>
-        <div class="listings">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 1" class="listing-image">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 2" class="listing-image">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 3" class="listing-image">
-            <!-- Add more images as needed -->
+        <div class="card-container">
+        {% for x in property_basic_info %}
+        <div class="card-property">
+            <div class="card-content-property">
+                <h2>{{ x.property_name }}</h2>
+                <a href="#" class="details-link-property">Click for details</a>
+            </div>
+            <div class="image-container-property">
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+            </div>
+        </div>
+        {% endfor %}
         </div>
     </section>
-    <section>
+    <section class="salesman_ranking">
         <div>
-            <h2>All Salesman</h2>
-            <ul>
-                {% for x in salesman_list %}
-                <li>{{ x.first_name }} {{ x.last_name }}</li>
-                {% endfor %}
-            </ul>
+            <h3 class="salesman_ranking_subtitle">We are professional dream catchers</h3>
+            <h2 class="salesman_ranking_title">Meet Our Top Salesman!</h2>
         </div>
+        <div class="card-container">
+            <!-- Cards for Salesman -->
+            {% for y in salesman_transactions %}
+            <div class="card">
+                <div class="profile-pic"></div>
+                <div class="card-content">
+                    <h2>{{ y.user__first_name }} {{ y.user__last_name }}</h2>
+                    <p>Reach out to me: {{ y.user__user_email}}</p>
+                    <p>Transactions made: {{ y.transaction_count }}</p>
+                </div>
+            </div>
+            {% endfor %}
     </section>
 </body>
 </html>
