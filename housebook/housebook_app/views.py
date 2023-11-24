@@ -18,8 +18,20 @@ def housebook_app(request):
     return HttpResponse(template.render(context, request))
 
 def dashboard(request):
-    template = loader.get_template('dashboard.html')
-    return HttpResponse(template.render())
+
+    property_data = Property.objects.raw("""
+        SELECT property_id,
+               property_name,
+               property_type,
+               zipcode,
+               city,
+               state,
+               image
+        FROM property p1
+        LEFT JOIN propertyItemImages p2 ON p1.property_id = p2.item_id
+    """)
+    
+    return render(request, 'dashboard.html', { 'property_data': property_data })
 
 def add_property(request):
     if request.method == 'POST':
@@ -33,6 +45,37 @@ def add_property(request):
         )
         new_property.save()  # Save the new Property to the database
         return redirect('dashboard')
+        
     else:
         return render(request, 'add_property.html')
+    
+def edit_property(request, property_id):
+
+    if request.method == 'POST':
+        new_property = Property(
+            property_id=request.POST['property_id'],
+            property_name=request.POST['property_name'],
+            property_type=request.POST['property_type'],
+            zipcode=request.POST['zipcode'],
+            city=request.POST['city'],
+            state=request.POST['state'],
+        )
+        new_property.save()  # Save the new Property to the database
+
+        return redirect('dashboard')
+    else:
+
+        property_data = Property.objects.raw("""
+                SELECT property_id,
+                    property_name,
+                    property_type,
+                    zipcode,
+                    city,
+                    state,
+                    image
+                FROM property p1
+                JOIN propertyItemImages p2 ON p1.property_id = p2.item_id
+                WHERE p1.property_id = %s """, [property_id])
+
+        return render(request, 'edit_property.html' , {'property_data': property_data})
 
