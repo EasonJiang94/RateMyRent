@@ -9,6 +9,8 @@ from django.db.models import Count
 from .models import Property
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import Count
+from .models import Property
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -35,6 +37,19 @@ def housebook_app(request):
   }
     return HttpResponse(template.render(context, request))
 
+def property_details(request, argument):
+    # receive argument from template
+    # find a property that fit property_id=argument from template
+    p = Property.objects.get(property_id=argument)
+
+    context = {
+        'property':p,
+    }
+    
+    return render(request, 'property_details.html', context)
+
+
+
 def dashboard(request):
 
     property_data = Property.objects.raw("""
@@ -50,6 +65,8 @@ def dashboard(request):
     """)
     
     return render(request, 'dashboard.html', { 'property_data': property_data })
+
+
 
 def add_property(request):
     if request.method == 'POST':
