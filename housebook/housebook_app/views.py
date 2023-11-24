@@ -5,6 +5,8 @@ from .models import Users
 from .models import Salesman
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import Count
+from .models import Property
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
