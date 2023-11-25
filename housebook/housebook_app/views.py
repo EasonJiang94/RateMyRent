@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import F
+from django.db.models import Subquery
 from django.template import loader
 from .models import Users
 from .models import Salesman
@@ -9,6 +11,7 @@ from django.db.models import Count
 from .models import Property
 from .models import Propertyaddress
 from .models import Propertyitem
+from .models import Propertyitemimages
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -25,13 +28,13 @@ def housebook_app(request):
       )[:6]
     )
     
-    # Retrieve property info
-    property_basic_info=Property.objects.all()[:3]
+    # Retrieve table that Property inner join Propertyitem
+    property_items = Propertyitem.objects.select_related('property').all()[:3]
 
     template = loader.get_template('index.html')
     context = {
     'salesman_transactions': salesman_transactions,
-    'property_basic_info':property_basic_info,
+    'property_items':property_items,
   }
     return HttpResponse(template.render(context, request))
 
@@ -44,10 +47,24 @@ def property_details(request, argument):
     p_item = Propertyitem.objects.get(property=argument)
     p_address = Propertyaddress.objects.get(address_id=argument)
 
+    # get propertyitem's item_id
+    item_ids = Propertyitem.objects.filter(property__property_id=F('property')).values_list('item_id', flat=True)
+
+    # get Propertyitemimages
+    # First, we create a queryset for the subquery
+    subquery = Propertyitem.objects.filter(
+        property__property_id=F('property')  # This assumes `property` is a ForeignKey to Property
+    ).values('item_id')
+    # Now, we use that subquery within the __in lookup for the main query
+    property_item_images = Propertyitemimages.objects.filter(
+        item_id__in=Subquery(subquery)
+    )
+
     context = {
         'property':p,
         'property_item':p_item,
         'property_address':p_address,
+        'property_item_images':property_item_images,
     }
     
     return render(request, 'property_details.html', context)

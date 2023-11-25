@@ -34,11 +34,11 @@
             <h1>Property Board</h1>
         </div>
         <div class="card-container">
-        {% for x in property_basic_info %}
+        {% for x in property_items %}
         <div class="card-property">
             <div class="card-content-property">
-                <h2>{{ x.property_name }}</h2>
-                <a href="{% url 'property_details' x.property_id %}" class="details-link-property">Click for details</a>
+                <h2>{{ x.property.property_name }}</h2>
+                <a href="{% url 'property_details' x.item_id %}" class="details-link-property">Click for details</a>
             </div>
             <div class="image-container-property">
                 <div class="image-property"></div>
