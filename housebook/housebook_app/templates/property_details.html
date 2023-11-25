@@ -30,17 +30,27 @@
     </main>
     <section class="property-board">
         <div class="heading">
-            <h2>Take A Closer Look At {{ property.property_name }}</h2>
+            <h2 id="take_a_closer_look">Take A Closer Look At {{ property.property_name }}</h2>
         </div>
         <div class="card-container">
         <div class="card-property">
-            <div class="card-content-property">
-            </div>
             <div class="image-container-property">
                 <div class="image-property"></div>
                 <div class="image-property"></div>
                 <div class="image-property"></div>
                 <div class="image-property"></div>
+            </div>
+            <div class="details_field">
+                <div class="address-info">
+                    <p> Address: {{property_address.address1}} {{property_address.address2}} {{property_address.city}} {{property_address.state}} {{property_address.zipcode}}</p>
+                </div>
+                <div class="details-list">
+                    <ul>
+                        <li>Item type: {{property_item.item_type}}</li>
+                        <li>Bedroom: {{property_item.item_bedroom}}</li>
+                        <li>Bathroom: {{property_item.item_bathroom}}</li>
+                    </ul>  
+                </div>  
             </div>
         </div>
         </div>
