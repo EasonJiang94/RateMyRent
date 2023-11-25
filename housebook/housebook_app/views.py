@@ -6,6 +6,7 @@ from .models import Salesman
 from .models import Transactions
 from .models import Property
 from django.db.models import Count
+from .forms import LoginForm
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -36,3 +37,22 @@ def dashboard(request):
     template = loader.get_template('dashboard.html')
     return HttpResponse(template.render())
     
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    pass
+                    # handle inactive user
+            else:
+                pass
+                # handle invalid login
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
