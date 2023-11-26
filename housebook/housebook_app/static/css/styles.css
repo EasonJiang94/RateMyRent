@@ -209,6 +209,44 @@ html, body {
     margin-right: 0;
 }
 
+/* property details */
+
+#take_a_closer_look{
+    padding-bottom: 20px;
+}
+
+.details_field {
+    padding-bottom: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.details-list {
+    flex: 0 1 auto; /* Don't grow, allow shrink, base width is auto */
+}
+
+.details-list ul {
+    list-style-type: none; /* Removes the default bullet points */
+    padding: 5px; /* Reset padding to 0 */
+    margin: 0; /* Reset margin to 0 to align with the left edge */
+}
+
+.details-list li {
+    padding: 5px 0; /* Adds some spacing between list items */
+    font-size: 16px; /* Adjust the font size as needed */
+}
+
+/* Optionally, if you want to add a bullet-like symbol before each item: */
+.details-list li:before {
+    content: "• "; /* Unicode character for a bullet point */
+    color: black; /* Bullet point color */
+    font-weight: bold; /* Make the bullet point bold */
+    display: inline-block; 
+    width: 1em; /* Ensures a consistent space between the bullet and the text */
+    margin-left: -1em; /* Adjusts the position of the bullet */
+}
+
 form {
     background-color: #fff;
     padding: 20px;
