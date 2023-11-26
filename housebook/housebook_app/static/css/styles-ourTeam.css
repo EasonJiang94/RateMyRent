@@ -27,9 +27,9 @@ html, body {
 .nav-container {
     display: flex;
     width: 1200px;
-    justify-content: center; /* This separates the logo and the nav-links */
+    justify-content: space-between; /* This separates the logo and the nav-links */
     align-items: center;
-    padding: 10px 30px; /* Add some padding on the sides */
+    padding: 10px 20px; /* Add some padding on the sides */
 }
 
 .navbar-content {

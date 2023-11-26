@@ -24,5 +24,5 @@ from housebook_app import views
 urlpatterns = [
     path('', include('housebook_app.urls')),
     path('admin/', admin.site.urls),
-    path('ourTeam', views.ourTeam, name='ourTeam'),
+    path('ourTeam/', views.ourTeam, name='ourTeam'),
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
