@@ -1,0 +1,108 @@
+/* Reset some basic elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, h1, p {
+    margin: 0;
+}
+
+/* Full screen body and html to make sure the hero image covers full screen */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: rgba(113, 113, 113, 0.5); 
+    color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between; /* This separates the logo and the nav-links */
+    align-items: center;
+    padding: 10px 20px; /* Add some padding on the sides */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 50px; /* Add space between the logo and the nav-links */
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; /* Center links horizontally */
+    align-items: center; /* Center links vertically */
+    flex-grow: 1; /* Allows nav-links to take up the available space */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space out the links */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links-item:hover{
+    color: rgb(157, 157, 157);
+}
+
+.hero {
+    text-align: center;
+    background-image: url('house.jpeg');
+    background-size: cover; /* Make the image cover the entire screen */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set the height of the hero section to full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+/* House section */
+.property-board {
+    text-align: center;
+    margin: 50px 0; /* Adjust the margin as needed */
+    padding-bottom: 40px;
+}
+
+.property-board .heading h2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #555; /* Adjust the color as needed */
+}
+
+.property-board .heading h1 {
+    font-size: 36px; /* Adjust the font size as needed */
+    color: #000; /* Adjust the color as needed */
+    margin: 10px 0; /* Adjust the margin as needed */
+}
+
+.property-board .listings {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap between images as needed */
+}
+
+.property-board .listing-image {
+    width: 30%; /* Adjust the width as needed */
+    height: auto; /* Adjust the height as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow to your images */
+    border-radius: 4px; /* Optional: Rounds the corners of your images */
+}
+
+.ranking_items{
+    color: aqua;
+}

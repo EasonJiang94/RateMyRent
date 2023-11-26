@@ -120,12 +120,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'productionfiles'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    "/var/www/static/",
-]
+STATIC_URL = "static/"
 
 # Database Images
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'pictures').replace('\\', '/')  # 设置静态文件路径为主目录下的media文件夹

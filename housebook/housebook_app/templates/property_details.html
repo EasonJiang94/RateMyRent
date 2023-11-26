@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real Estate Website</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">HOUSEBOOK</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-links-item">ABOUT US</a></li>
+                    <li><a href="dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                    <!-- Add other navigation links here -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p>Housebook can help you</p>
+            <h1>Find your forever home</h1>
+            <!-- Content based on the image provided -->
+        </section>
+    </main>
+    <section class="property-board">
+        <div class="heading">
+            <h2 id="take_a_closer_look">Take A Closer Look At {{ property.property_name }}</h2>
+        </div>
+        <div class="card-container">
+        <div class="card-property">
+            <div class="image-container-property">
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+                <div class="image-property"></div>
+            </div>
+            <div class="details_field">
+                <div class="address-info">
+                    <p> Address: {{property_address.address1}} {{property_address.address2}} {{property_address.city}} {{property_address.state}} {{property_address.zipcode}}</p>
+                </div>
+                <div class="details-list">
+                    <ul>
+                        <li>Item type: {{property_item.item_type}}</li>
+                        <li>Bedroom: {{property_item.item_bedroom}}</li>
+                        <li>Bathroom: {{property_item.item_bathroom}}</li>
+                    </ul>  
+                </div>  
+            </div>
+        </div>
+        </div>
+    </section>
+</body>
+</html>
