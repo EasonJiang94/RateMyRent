@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Réal Estate Agency</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="signup-container">
+        <form class="signup-form">
+            <h2>Sign Up</h2>
+            <div class="form-control">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" required>
+            </div>
+            <div class="form-control">
+                <label for="middle-name">Middle Name (Optional)</label>
+                <input type="text" id="middle-name" name="middle_name">
+            </div>
+            <div class="form-control">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" required>
+            </div>
+            <div class="form-control">
+                <label for="organization-name">Organization (Optional)</label>
+                <input type="text" id="organization-name" name="organization_name">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="user_email" required>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="signup-button">Sign Up</button>
+            <div class="links">
+                <a href="login.html">Already have an account? Log In</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
