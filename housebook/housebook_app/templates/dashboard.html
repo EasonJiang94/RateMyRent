@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Real Estate Website</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 <body>
     <header>
@@ -15,23 +15,51 @@
                     <li><a href="/" class="nav-links-item">HOME</a></li>
                     <li><a href="#" class="nav-links-item">ABOUT US</a></li>
                     <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+<<<<<<< HEAD
                     <li><a href="/login/" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
+=======
+                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+>>>>>>> dev
                 </ul>
             </div>
         </nav>
     </header>
-    <section class="property-board">
-        <div class="heading">
-            <h1>Property List</h1>
-            <a href="{% url 'add_property' %}" class="button">Add Property</a>
-        </div>
-        <div class="listings">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 1" class="listing-image">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 2" class="listing-image">
-            <img src="{% static 'css/sample_house.jpg' %}" alt="Listing 3" class="listing-image">
-            <!-- Add more images as needed -->
-        </div>
+    <div class="heading">
+      <h1>Property List</h1>
+    </div>
+    <section class="add-btn-sec">
+      <a href="{% url 'add_property' %}" class="btn-add-pty">Add Property</a>
     </section>
+    <section class="dashboard-property-board">
+      {% for property in properties %}
+      <div class="dashboard-card-property">
+          <div class="dashboard-image-container-property">
+              {% with property.propertyitem_set.first as first_item %}
+                  {% if first_item %}
+                      {% with first_item.propertyitemimages_set.first as first_image %}
+                          {% if first_image %}
+                              <a href="{% url 'edit_property' property.property_id %}">
+                                  <img src="/static/{{ first_image.image }}" alt="{{ property.property_name }}" class="listing-image">
+                              </a>
+                          {% endif %}
+                      {% endwith %}
+                  {% endif %}
+              {% endwith %}
+          </div>
+          <div class="dashboard-card-content-property">
+            {% with property.propertyitem_set.first as first_item %}
+              <!-- Displaying the address details -->
+              <p>Property Name: {{ property.property_name }}</p>
+              <p>Property Type: {{ property.property_type }}</p>
+              <p>Address: {{ first_item.address.address1 }}</p>
+              <p>City: {{ first_item.address.city }}</p>
+              <p>State: {{ first_item.address.state }}</p>
+              {% endwith %}
+          </div>
+      </div>
+      {% endfor %}
+  </section>
 </body>
 </html>
+

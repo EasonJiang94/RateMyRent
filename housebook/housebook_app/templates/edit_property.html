@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property Add Form</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">HOUSEBOOK</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-links-item">ABOUT US</a></li>
+                    <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                    <!-- Add other navigation links here -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="add-property-board ">
+        <form id="propertyForm" action="{% url 'edit_property' property.property_id %}" method="POST">
+
+            {% csrf_token %}
+            <label for="propertyId">Property ID:</label>
+            <input type="text" id="propertyId" name="property_id" value="{{ property.property_id }}" required>
+    
+            <label for="propertyName">Property Name:</label>
+            <input type="text" id="propertyName" name="property_name" value="{{ property.property_name }}" maxlength="30" required>
+    
+            <label for="propertyType">Property Type:</label>
+            <input type="text" id="propertyType" name="property_type" value="{{ property.property_type }}" maxlength="30" required>
+    
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" name="zipcode" value="{{ property.zipcode }}" required>
+    
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="{{ property.city }}" maxlength="30" required>
+    
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" value="{{ property.state }}" maxlength="10" required>
+    
+            <button type="submit">Update</button>
+            <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
+        </form>
+
+        <!-- <form action="{% url 'delete_property' property_id=property.property_id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="property_id" value="{{ x.property_id }}">
+            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this property?');">
+        </form> -->
+    </section>
+</body>
+</html>
