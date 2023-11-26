@@ -84,13 +84,13 @@ def dashboard(request):
         'propertyitem_set__address'
     ).all()
 
-    for property in properties:
-        print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
-        for item in property.propertyitem_set.all():
-            print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
-            print(f"  Address: {item.address.address1}, {item.address.city}")
-            for image in item.propertyitemimages_set.all():
-                print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
+    # for property in properties:
+    #     print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
+    #     for item in property.propertyitem_set.all():
+    #         print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
+    #         print(f"  Address: {item.address.address1}, {item.address.city}")
+    #         for image in item.propertyitemimages_set.all():
+    #             print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
 
     context = {
         'properties': properties,
