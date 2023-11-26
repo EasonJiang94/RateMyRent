@@ -7,6 +7,6 @@ urlpatterns = [
     path('', views.housebook_app, name='housebook_home'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('property_details/<int:argument>/', views.property_details, name='property_details'),
-    path('dashboard/', views.dashboard, name='dashboard'),
     path('edit_property/<int:property_id>/', views.edit_property, name='edit_property'),
+    path('delete_property/<int:property_id>/', views.delete_property, name='delete_property'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -233,7 +233,6 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-
 button {
     padding: 8px 13px;
     color: #fff;
@@ -248,6 +247,8 @@ button:hover {
     background-color: #0056b3;
 }
 
+
+/* for dashboard */
 .btn-cancel {
     padding: 8px 13px;
     color: #fff;
@@ -270,50 +271,94 @@ button:hover {
     padding-bottom: 40px;
 }
 
-
-#dashboard-container{
-    max-width: 600px; /* Adjust the max width as needed */
-    margin: auto; /* Center the container */
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allows multiple items to wrap in rows */
+    justify-content: space-around; /* Evenly spaces the child elements with space around them */
+    gap: 20px; /* Adds space between the flex items */
 }
 
-.property-row{
+.property-row {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     margin-right: -15px;
-    margin-left: -15px; 
+    margin-left: -15px;
 }
 
 .box {
-    flex: 0 0 33.33%; 
-    max-width: 33.33%;
+    flex: 0 0 25%; /* Each box will take up 25% of the width */
+    max-width: 25%; /* Prevents the box from growing larger than 25% */
     padding-right: 15px;
-    padding-left: 15px; 
-    margin-bottom: 30px;
-  }
+    padding-left: 15px;
+    box-sizing: border-box; /* Include padding and border in the width */
+    margin-bottom: 30px; /* Space between rows */
+}
 
-  @media (max-width: 992px) {
-    .box {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .box {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-
-  .dashboard-container .listing-image{
-    width: 100%; 
-    height: auto; 
-    border: 1px solid #ddd; 
-    margin-bottom: 15px; 
-  }
-
-  .dashboard-img-container-property {
-    display: flex;
+.dashboard-card-property {
+    width: 100%;
+    margin-bottom: 20px; /* Space between the rows of items */
     justify-content: space-between;
-    padding: 20px;
+}
+
+.dashboard-image-container-property,
+.dashboard-card-content-property {
+    flex: 1; /* Allows both children to grow and fill the flex container */
+}
+
+.dashboard-property-board {
+    display: flex;
+    flex-direction: column;
+    column-width: 30%;
+}
+
+.dashboard-card-property .listing-image {
+    width: 100%; /* Makes the image take up 100% of its container's width */
+    display: block; /* Ensures the image does not inline */
+    border-radius: 8px; /* Optional: Adds rounded corners to the image */
+}
+
+.dashboard-card-content-property {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.dashboard-property-board {
+    text-align: center;
+    margin: 50px 0; /* Adjust the margin as needed */
+}
+
+.dashboard-property-board .heading h2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #555; /* Adjust the color as needed */
+}
+
+.dashboard-property-board .heading h1 {
+    font-size: 36px; /* Adjust the font size as needed */
+    color: #000; /* Adjust the color as needed */
+    margin: 10px 0; /* Adjust the margin as needed */
+}
+
+/*
+.property-board .dashboard-container .listing-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+*/
+/* For smaller desktops and laptops */
+@media (max-width: 1024px) {
+    .dashboard-card-property {
+        width: calc(100% / 2 - 20px); /* Adjusts for 2 items per row */
+    }
+}
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+    .dashboard-card-property {
+        width: 100%; /* Full width for a single item per row */
+        flex-direction: column; /* Stacks image and content vertically */
+    }
 }

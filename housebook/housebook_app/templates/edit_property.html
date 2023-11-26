@@ -45,6 +45,12 @@
             <button type="submit">Submit</button>
             <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
         </form>
+
+        <!-- <form action="{% url 'delete_property' property_id=property.property_id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="property_id" value="{{ x.property_id }}">
+            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this property?');">
+        </form> -->
     </section>
 </body>
 </html>

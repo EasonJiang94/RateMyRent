@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, h1, p {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+header{
+    display: block;
+}
+
+/* Full screen body and html to make sure the hero image covers full screen */
+html, body {
+    padding-top: 30px;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: rgb(25, 53, 123);
+    color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    left: 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between; /* This separates the logo and the nav-links */
+    align-items: center;
+    padding: 10px 20px; /* Add some padding on the sides */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 50px; /* Add space between the logo and the nav-links */
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; /* Center links horizontally */
+    align-items: center; /* Center links vertically */
+    flex-grow: 1; /* Allows nav-links to take up the available space */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space out the links */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links-item:hover{
+    color: rgb(157, 157, 157);
+}
+
+/* Ending of the nav part */
+
+/* Main content of dashboard page */
+.dashboard-property-board {
+    display: flex; /* This will enable Flexbox for the container */
+    flex-wrap: wrap; /* This will allow cards to wrap onto the next line */
+    justify-content: space-between; /* This spaces out the cards evenly */
+}
+
+.dashboard-card-property {
+    padding: 20px;
+    width: calc(33.333% - 20px); /* One third of the parent container width minus some margin */
+    display: flex; /* Enables Flexbox */
+    flex-direction: column; /* Stacks flex items vertically */
+    margin-bottom: 20px; /* Space between the cards */
+}
+
+.dashboard-image-container-property {
+    width: 100%;
+    flex: 1; /* Assigns a flex-grow value so it can expand */
+    /* You may want to limit the size of the image container or make it scrollable */
+}
+
+.dashboard-card-content-property {
+    width: 100%;
+    flex: 2; /* Allows the content area to take up twice as much space as the image */
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.listing-image {
+    width: 100%;
+    object-fit: cover; /* Cover the container while keeping aspect ratio */
+    display: block;
+    border-radius: 10px;
+}
+
+.btn-delete {
+    background-color: #ff0000; /* Red background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+.add-btn-sec{
+    display: flex;
+    justify-content: flex-end; /* This will align the button to the right */
+    margin-right: 20px;
+}
+
+.btn-add-pty {
+    padding: 10px 20px; /* Example padding */
+    background-color: #007bff; /* Example background color */
+    color: white; /* Text color */
+    text-decoration: none; /* Removes underline from links */
+    border-radius: 4px;
+}
+
+
+/* Media query for smaller screens if you want to stack the cards instead */
+@media (max-width: 768px) {
+    .dashboard-card-property {
+        width: 100%; /* Each card takes full width on smaller screens */
+    }
+}

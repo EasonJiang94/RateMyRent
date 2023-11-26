@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Real Estate Website</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet1" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 <body>
     <header>
@@ -23,92 +20,41 @@
             </div>
         </nav>
     </header>
-    <section class="property-board">
-        <div class="heading">
-            <h1>Property List</h1>
-            <a href="{% url 'add_property' %}" class="button">Add Property</a>
-        </div>
-        
+    <div class="heading">
+      <h1>Property List</h1>
+    </div>
+    <section class="add-btn-sec">
+      <a href="{% url 'add_property' %}" class="btn-add-pty">Add Property</a>
     </section>
-    <section class="property-board">
-        <div class="card-container" id="dashboard-container">
-          <div class="card-property">
-            {% for x in property_data %}
-            <div class="image-container-property">
-              <a href="{% url 'edit_property' x.property_id %}">
-                  <img src="/static/{{ x.image }}" alt="{{ x.property_name }}" class="listing-image">
-              </a>
-            </div>
-            <div class="content-property">
-                <p>{{ x.property_name }} </p>
-                <p>{{ x.property_type }} </p>
-                <p>{{ x.city }}</p>
-                <p>{{ x.zipcode }}</p>
-            </div>
-            {% endfor %}
+    <section class="dashboard-property-board">
+      {% for property in properties %}
+      <div class="dashboard-card-property">
+          <div class="dashboard-image-container-property">
+              {% with property.propertyitem_set.first as first_item %}
+                  {% if first_item %}
+                      {% with first_item.propertyitemimages_set.first as first_image %}
+                          {% if first_image %}
+                              <a href="{% url 'edit_property' property.property_id %}">
+                                  <img src="/static/{{ first_image.image }}" alt="{{ property.property_name }}" class="listing-image">
+                              </a>
+                          {% endif %}
+                      {% endwith %}
+                  {% endif %}
+              {% endwith %}
           </div>
-        </div>
-    </section>
+          <div class="dashboard-card-content-property">
+            {% with property.propertyitem_set.first as first_item %}
+              <!-- Displaying the address details -->
+              <p>Property Name: {{ property.property_name }}</p>
+              <p>Property Type: {{ property.property_type }}</p>
+              <p>Address: {{ first_item.address.address1 }}</p>
+              <p>City: {{ first_item.address.city }}</p>
+              <p>State: {{ first_item.address.state }}</p>
+              {% endwith %}
+          </div>
+      </div>
+      {% endfor %}
+  </section>
 </body>
 </html>
-
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <style>
-        .box {
-            background-color: pink;
-            height: 300px;
-            width: 300px;
-        }
-    </style>
-</head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand mb-0 h1" href="#">Housebook</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-    <section>
-        <div class="container-fluid">
-            <div class="row text-center" >
-                <div class="box mt-1 ml-1 col-3">box1</div>
-                <div class="box mt-1 ml-1 col-3">box2</div>
-                <div class="box mt-1 ml-1 col-3">box3</div>
-            </div>
-        </div>
-    </section>
-
-  </body>
-</html> -->
 
