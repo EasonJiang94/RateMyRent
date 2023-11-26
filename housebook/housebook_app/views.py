@@ -12,17 +12,11 @@ from .models import Propertyitemimages
 from .models import Property, Propertyitem, Propertyitemfeatures2, Propertyitemimages, Propertyitemlabel, Propertyitempayment, Property, Transactions
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-<<<<<<< HEAD
 from django.db.models import Count
-<<<<<<< HEAD
 from .forms import LoginForm
-=======
 from .models import Property
->>>>>>> dev
-=======
 from django.db.models import Count, Prefetch
 from django.db import transaction
->>>>>>> dev
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -82,10 +76,8 @@ def property_details(request, argument):
 
 
 def dashboard(request):
-<<<<<<< HEAD
     template = loader.get_template('dashboard.html')
     return HttpResponse(template.render())
-<<<<<<< HEAD
     
 def login(request):
     template = loader.get_template('login.html')
@@ -94,8 +86,7 @@ def login(request):
 def signup(request):
     template = loader.get_template('signup.html')
     return HttpResponse(template.render())
-=======
-=======
+
 
     #property_data = Property.objects.select_related('itme_id')
 
@@ -120,7 +111,6 @@ def signup(request):
     }
     
     return render(request, 'dashboard.html', context)
->>>>>>> dev
 
 
 
@@ -183,8 +173,5 @@ def delete_property(request, property_id):
             # Finally, delete the Property
             property_to_delete.delete()
 
-<<<<<<< HEAD
->>>>>>> dev
-=======
+
         return redirect(reverse('dashboard'))  # Redirect to the list of properties
->>>>>>> dev
