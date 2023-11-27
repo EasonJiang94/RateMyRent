@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Property Add Form</title>
+    <title>Property Edit Form</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -24,6 +24,11 @@
         <form id="propertyForm" action="{% url 'edit_property' property.property_id %}" method="POST">
 
             {% csrf_token %}
+                <!-- Hidden fields for IDs -->
+            <input type="hidden" id="property_id" name="property_id" value="{{ property.property_id }}">
+            <input type="hidden" id="item_id" name="item_id" value="{{ propertyitem.item_id }}">
+            <input type="hidden" id="address_id" name="address_id" value="{{ propertyaddress.address_id }}">
+
             <label for="propertyId">Property ID:</label>
             <input type="text" id="propertyId" name="property_id" value="{{ property.property_id }}" required>
     
@@ -41,7 +46,25 @@
     
             <label for="state">State:</label>
             <input type="text" id="state" name="state" value="{{ property.state }}" maxlength="10" required>
-    
+
+            <label for="item_type">Item Type:</label>
+            <input type="text" id="item_type" name="item_type" value="{{ propertyitem.item_type }}" maxlength="10" required>
+
+            <label for="capacity">Capacity:</label>
+            <input type="text" id="capacity" name="capacity" value="{{ propertyitem.capacity }}" maxlength="10" required>
+
+            <label for="item_bedroom">Bedroom:</label>
+            <input type="text" id="item_bedroom" name="item_bedroom" value="{{ propertyitem.item_bedroom }}" maxlength="10" required>
+
+            <label for="item_bathroom">Bathroom:</label>
+            <input type="text" id="item_bathroom" name="item_bathroom" value="{{ propertyitem.item_bathroom }}" maxlength="10" required>
+
+            <label for="address1">Address1:</label>
+            <input type="text" id="address1" name="address1" value="{{ propertyaddress.address1 }}" maxlength="50" required>
+
+            <label for="address2">Address2:</label>
+            <input type="text" id="address2" name="address2" value="{{ propertyaddress.address2 }}" maxlength="50" required>
+            
             <button type="submit">Update</button>
             <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
         </form>
