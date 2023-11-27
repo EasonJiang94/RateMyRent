@@ -50,7 +50,6 @@ def housebook_app(request):
     'property_items':property_items,
   }
     return HttpResponse(template.render(context, request))
-
 def property_details(request, argument):
     # receive argument from template
     # find a property that fit property_id=argument from template
@@ -140,8 +139,8 @@ def add_property(request):
     else:
         return render(request, 'add_property.html')
     
-def edit_property(request, property_id):
 
+def edit_property(request, property_id):
     property_data = Property.objects.get(property_id=property_id)
 
     if request.method == 'POST':
@@ -185,3 +184,10 @@ def delete_property(request, property_id):
 
 
         return redirect(reverse('dashboard'))  # Redirect to the list of properties
+    
+def ourTeam(request):   
+    team_list = Users.objects.raw('''select * from users u inner join administrator a on u.user_id=a.user_id left join userPhoto up on u.user_id=up.user_id where u.user_role=\'ADMIN\'''')
+    #imgUrl=os.path.join(settings.MEDIA_URL, 'Users', photo)
+    return render(request, 'ourTeam.html', { 'team_list': team_list })
+    #return HttpResponse(template.render(context, request))
+
