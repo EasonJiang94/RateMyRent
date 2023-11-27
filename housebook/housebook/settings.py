@@ -126,7 +126,7 @@ STATIC_URL = "static/"
 
 # Database Images
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'pictures').replace('\\', '/')  # 设置静态文件路径为主目录下的media文件夹
-#MEDIA_URL = '/pictures/'
+#MEDIA_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
