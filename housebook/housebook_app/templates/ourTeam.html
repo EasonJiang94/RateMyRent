@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="{% static 'css/styles-ourTeam.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="navbar-content">
+                    <div class="logo">HOUSEBOOK</div>
+                    <ul class="nav-links">
+                        <li><a href="/ourTeam/" class="nav-links-item">ABOUT US</a></li>
+                        <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                        <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                        <!-- Add other navigation links here -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="team">
+            <div class="team-circles">
+                <div class="team-container">
+                    <div class="team-title-section">
+                        <div class="team-text-Heading1"><h1>Our Team<h1></div>
+                    </div>
+                    <div class="team-column">
+                        {% for x in team_list %}
+                        <div class="team-card">
+                            <div class="team-image-wrapper"><image class="team-photo" src="/static/{{ x.photo }}" loading="lazy" width="270" height="270" alt="">
+                            </div>
+                            <div class="team-content">
+                                <div class="team-info">
+                                    <div class="team-tex-full-name">
+                                        <p>{{ x.first_name }} {{ x.last_name }}</p>
+                                    </div>
+                                    <div class="team-text-job-title">
+                                        <p>{{ x.job_title }}</p>
+                                    </div>
+                                </div>
+                                    <div class="team-text-description"><p>{{ x.member_introduction }}</p></div>
+                                </div>
+                        </div>
+                        {% endfor %}            
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>       
+</body>
+</html>

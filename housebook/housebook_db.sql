@@ -364,13 +364,21 @@ INSERT INTO propertyItem (item_id, property_id, address_id, item_type, capacity,
 (13, 13, 13, '2B2B', 2000, 2, 2),(14, 14, 14, '1B1.5B', 1500, 1, 1.5),(15, 15, 15, 'STUDIO', 1000, 1, 1);
 
 INSERT INTO propertyItemImages (item_id, image_id, image) VALUES
-(1, 1, '/images/item1_image1.jpg'),(2, 2, '/images/item2_image1.jpg'),
-(3, 3, '/images/item3_image1.jpg'),(4, 4, '/images/item4_image1.jpg'),
-(5, 5, '/images/item5_image1.jpg'),(6, 6, '/images/item6_image1.jpg'),
-(7, 7, '/images/item7_image1.jpg'),(8, 8, '/images/item8_image1.jpg'),
-(9, 9, '/images/item9_image1.jpg'),(10, 10, '/images/item10_image1.jpg'),
-(11, 11, '/images/item11_image1.jpg'),(12, 12, '/images/item12_image1.jpg'),
-(13, 13, '/images/item13_image1.jpg'),(14, 14, '/images/item14_image1.jpg'),(15, 15, '/images/item15_image1.jpg');
+(1, 1, 'css/item1_image.jpg'),
+(2, 2, 'css/item2_image.jpg'),
+(3, 3, 'css/item3_image.jpg'),
+(4, 4, 'css/item4_image.jpg'),
+(5, 5, 'css/item5_image.jpg'),
+(6, 6, 'css/item6_image.jpg'),
+(7, 7, 'css/item7_image.jpg'),
+(8, 8, 'css/item8_image.jpg'),
+(9, 9, 'css/item9_image.jpg'),
+(10, 10, 'css/item10_image.jpg'),
+(11, 11, 'css/item11_image.jpg'),
+(12, 12, 'css/item12_image.jpg'),
+(13, 13, 'css/item13_image.jpg'),
+(14, 14, 'css/item14_image.jpg'),
+(15, 15, 'css/item15_image.jpg');
 
 
 INSERT INTO propertyItemPayment (item_id, payment_id, payment_name, payment_amount) VALUES

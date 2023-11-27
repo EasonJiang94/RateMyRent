@@ -23,7 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('add_property/', views.add_property, name='add_property'),
+    path('ourTeam/', views.ourTeam, name='ourTeam'),
 ]
-
-
-

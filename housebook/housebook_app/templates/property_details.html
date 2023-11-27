@@ -13,7 +13,7 @@
                 <div class="logo">HOUSEBOOK</div>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-links-item">ABOUT US</a></li>
-                    <li><a href="dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
+                    <li><a href="{% url 'dashboard' %}" class="nav-links-item">MY DASHBOARD</a></li>
                     <li><a href="#" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
                 </ul>
@@ -35,10 +35,20 @@
         <div class="card-container">
         <div class="card-property">
             <div class="image-container-property">
-                <div class="image-property"></div>
-                <div class="image-property"></div>
-                <div class="image-property"></div>
-                <div class="image-property"></div>
+                {% for property in properties %}
+                    <!-- Show only the first filtered_propertyitem -->
+                    {% if property.filtered_propertyitems %}
+                        {% with item=property.filtered_propertyitems.0 %}
+                            <!-- Show images for this item -->
+                            {% for image in item.propertyitemimages_set.all %}
+                                <img class="image-property2" src="{% static image.image %}" alt="{% static image.image %}">
+                                <img class="image-property2" src="{% static image.image %}" alt="Image">
+                                <img class="image-property2" src="{% static image.image %}" alt="Image">
+                                <img class="image-property2" src="{% static image.image %}" alt="Image">
+                            {% endfor %}
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="details_field">
                 <div class="address-info">
