@@ -128,10 +128,14 @@ def add_property(request):
         return render(request, 'add_property.html')
     
 def edit_property(request, property_id):
+    #print(f"Item Id: {propertyitem_data.item_id}, Property ID: {propertyitem_data.property_id}, Address Id: {propertyitem_data.address_id}")
 
     property_data = Property.objects.get(property_id=property_id)
+    propertyitem_data = Propertyitem.objects.get(property_id=property_id)
+    propertyaddress_data =  Propertyaddress.objects.get(address_id=propertyitem_data.address_id)
 
     if request.method == 'POST':
+        #print(request.POST.keys())
         property_data = Property(
             property_id=request.POST['property_id'],
             property_name=request.POST['property_name'],
@@ -140,12 +144,35 @@ def edit_property(request, property_id):
             city=request.POST['city'],
             state=request.POST['state'],
         )
-        property_data.save()  # Save the new Property to the database
+        property_data.save()  # Edit Property
+
+        propertyitem_data = Propertyitem(
+            item_id=request.POST['item_id'],
+            property_id=request.POST['property_id'],
+            address_id=request.POST['address_id'],
+            item_type=request.POST['item_type'],
+            capacity=request.POST['capacity'],
+            item_bedroom=request.POST['item_bedroom'],
+            item_bathroom=request.POST['item_bathroom'],
+        )
+        propertyitem_data.save()  # Edit Propertyitem
+
+        propertyaddress_data = Propertyaddress(
+            address_id=request.POST['address_id'],
+            address1=request.POST['address1'],
+            address2=request.POST['address2'],
+            city=request.POST['city'],
+            zipcode=request.POST['zipcode'],
+            state=request.POST['state'],
+        )
+        propertyaddress_data.save()  # Edit Propertyaddress
 
         return redirect('dashboard')
     
     context = {
-        'property':property_data,
+        'property': property_data,
+        'propertyitem': propertyitem_data,
+        'propertyaddress': propertyaddress_data,
     }
             
     return render(request, 'edit_property.html' , context)
