@@ -34,7 +34,15 @@ def housebook_app(request):
     )
     
     # Retrieve table that Property inner join Propertyitem
-    property_items = Propertyitem.objects.select_related('property').all()[:3]
+    property_items = Property.objects.prefetch_related(
+        Prefetch(
+            'propertyitem_set',
+            queryset=Propertyitem.objects.prefetch_related('propertyitemimages_set'),
+            to_attr='filtered_propertyitems'
+        ),
+        'propertyitem_set__address'
+    ).all()[:3]
+
 
     template = loader.get_template('index.html')
     context = {
@@ -60,11 +68,21 @@ def property_details(request, argument):
 
     property_item_images = Propertyitemimages.objects.filter(item__item_id=argument).select_related('item__property')
 
+    properties = Property.objects.prefetch_related(
+        Prefetch(
+            'propertyitem_set',
+            queryset=Propertyitem.objects.filter(item_id=argument).prefetch_related('propertyitemimages_set'),
+            to_attr='filtered_propertyitems'
+        ),
+        'propertyitem_set__address'
+    ).all()
+
     context = {
         'property':p,
         'property_item':p_item,
         'property_address':p_address,
         'property_item_images':property_item_images,
+        'properties':properties,
     }
     
     return render(request, 'property_details.html', context)
