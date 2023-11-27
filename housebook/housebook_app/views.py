@@ -55,15 +55,10 @@ def property_details(request, argument):
     # get propertyitem's item_id
     item_ids = Propertyitem.objects.filter(property__property_id=F('property')).values_list('item_id', flat=True)
 
-    # get Propertyitemimages
-    # First, we create a queryset for the subquery
-    subquery = Propertyitem.objects.filter(
-        property__property_id=F('property')  # This assumes `property` is a ForeignKey to Property
-    ).values('item_id')
-    # Now, we use that subquery within the __in lookup for the main query
-    property_item_images = Propertyitemimages.objects.filter(
-        item_id__in=Subquery(subquery)
-    )
+    # join Property, Propertyitem, Propertyitemimages
+    # property_item_images = Propertyitemimages.objects.select_related('item__property').all()
+
+    property_item_images = Propertyitemimages.objects.filter(item__item_id=argument).select_related('item__property')
 
     context = {
         'property':p,
