@@ -17,7 +17,7 @@ from .forms import LoginForm
 from .models import Property
 from django.db.models import Count, Prefetch
 from django.db import transaction
-
+import time
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
     # Only pick top 6 salesman
@@ -74,10 +74,6 @@ def property_details(request, argument):
     
     return render(request, 'property_details.html', context)
 
-
-def dashboard(request):
-    template = loader.get_template('dashboard.html')
-    return HttpResponse(template.render())
     
 def login(request):
     template = loader.get_template('login.html')
@@ -88,6 +84,7 @@ def signup(request):
     return HttpResponse(template.render())
 
 
+def dashboard(request):
     #property_data = Property.objects.select_related('itme_id')
 
     properties = Property.objects.prefetch_related(
@@ -97,14 +94,14 @@ def signup(request):
         ),
         'propertyitem_set__address'
     ).all()
-
-    for property in properties:
-        print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
-        for item in property.propertyitem_set.all():
-            print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
-            print(f"  Address: {item.address.address1}, {item.address.city}")
-            for image in item.propertyitemimages_set.all():
-                print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
+    time.sleep(0.001) # wait for the sql database loading
+    # for property in properties:
+    #     print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
+    #     for item in property.propertyitem_set.all():
+    #         print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
+    #         print(f"  Address: {item.address.address1}, {item.address.city}")
+    #         for image in item.propertyitemimages_set.all():
+    #             print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
 
     context = {
         'properties': properties,
