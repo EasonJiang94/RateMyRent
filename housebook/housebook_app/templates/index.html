@@ -14,7 +14,7 @@
                 <ul class="nav-links">
                     <li><a href="/ourTeam/" class="nav-links-item">ABOUT US</a></li>
                     <li><a href="dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
-                    <li><a href="#" class="nav-links-item">LOGIN</a></li>
+                    <li><a href="/login/" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
                 </ul>
             </div>
@@ -33,21 +33,28 @@
             <h2>Find your dream house here!</h2>
             <h1>Property Board</h1>
         </div>
-        <div class="card-container">
-        {% for x in property_items %}
-        <div class="card-property">
-            <div class="card-content-property">
-                <h2>{{ x.property.property_name }}</h2>
-                <a href="{% url 'property_details' x.item_id %}" class="details-link-property">Click for details</a>
-            </div>
-            <div class="image-container-property">
-                <div class="image-property"></div>
-                <div class="image-property"></div>
-                <div class="image-property"></div>
-                <div class="image-property"></div>
-            </div>
-        </div>
-        {% endfor %}
+        <div class="card-container-index">
+
+            {% for property in property_items %}
+                {% if property.propertyitem_set.exists %}
+                    {% with item=property.propertyitem_set.all.0 %}
+                        <div class="card-property-index">
+                            <div class="card-content-property">
+                                <h2>{{ property.property_name }}</h2>
+                                <a href="{% url 'property_details' item.item_id %}" class="details-link-property">Click for details</a>
+                            </div>
+                            <div class="image-container-property">
+                                <!-- Assuming you want to display images for the first item -->
+                                {% for image in item.propertyitemimages_set.all %}
+                                <img class="image-property3" src="{% static image.image %}" alt="{% static image.image %}">
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endwith %}
+                {% endif %}
+            {% endfor %}
+
+
         </div>
     </section>
     <section class="salesman_ranking">
