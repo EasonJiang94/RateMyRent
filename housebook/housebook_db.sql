@@ -6,7 +6,7 @@ use housebook;
 CREATE TABLE userAddress(
 	address_id int not null AUTO_INCREMENT,
 	address1 varchar(50), 	#4101 Bigelow Blvd.
-	address2 varchar(50), 	#Apt 133
+	address2 varchar(50), 	#Apt 999
 	city varchar(30),     	#Pittsburgh
 	state varchar(30),    	#PA
 	zipcode int,      		#15213
@@ -114,7 +114,7 @@ CREATE TABLE grantRoleFeatures(
 CREATE TABLE propertyAddress(
 	address_id int not null AUTO_INCREMENT, 
 	address1 varchar(50), 	#4101 Bigelow Blvd.
-	address2 varchar(50),	#Apt 133
+	address2 varchar(50),	#Apt 999
 	city varchar(30),		#Pittsburgh
 	state varchar(30),		#PA
 	zipcode int,			#15213
@@ -352,7 +352,7 @@ DROP TABLE lookUpTable;
 /*------------------------------ Insert Data ------------------------------*/
 
 INSERT INTO userAddress (address1, address2, city, state, zipcode) VALUES
-('4101 Bigelow Blvd.', 'Apt 133', 'Pittsburgh', 'PA', 15213),('123 Main St', 'Suite 567', 'Anytown', 'CA', 90210),
+('4101 Bigelow Blvd.', 'Apt 999', 'Pittsburgh', 'PA', 15213),('123 Main St', 'Suite 567', 'Anytown', 'CA', 90210),
 ('789 Oak Lane', NULL, 'Smallville', 'NY', 56789),('456 Elm Street', 'Unit 101', 'Metro City', 'IL', 67890),
 ('999 Pine Avenue', NULL, 'Greenfield', 'TX', 34567),('321 Maple Drive', 'Apt 45', 'Riverside', 'FL', 45678),
 ('555 Cedar Street', NULL, 'Meadowville', 'OH', 23456),('777 Birch Road', 'Apt 22', 'Mountain View', 'CA', 87654),
@@ -463,7 +463,7 @@ INSERT INTO grantRoleFeatures (user_role, features, features_value) VALUES
 
 #Property
 INSERT INTO propertyAddress (address1, address2, city, state, zipcode) VALUES
-('4101 Bigelow Blvd.', 'Apt 133', 'Pittsburgh', 'PA', 15213),
+('4101 Bigelow Blvd.', 'Apt 999', 'Pittsburgh', 'PA', 15213),
 ('123 Main St', 'Suite 567', 'Anytown', 'CA', 90210),
 ('789 Oak Lane', NULL, 'Smallville', 'NY', 56789),
 ('456 Elm Street', 'Unit 101', 'Metro City', 'IL', 67890),
