@@ -1,5 +1,5 @@
 while : 
 do 
-	sleep 5
+	sleep 69
 	git pull
 done
