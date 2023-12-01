@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-#-e2j9+%6c%oqf7-qy8cz**+7m5hsf)=_@_#!ozjvtf8h)3#!v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["3.142.70.39"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "3.142.70.39"]
 
+AUTH_USER_MODEL = 'housebook_app.Users'
 
 # Application definition
 
