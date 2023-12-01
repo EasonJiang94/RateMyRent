@@ -1,9 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, h1, p {
+    margin: 0;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
+
+ul {
+    list-style-type: none;
+}
+
+/* Full screen body and html to make sure the hero image covers full screen */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.navbar {
+    background-color: rgb(25, 53, 123);
+    color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.nav-container {
+    color: white;
+    display: flex;
+    justify-content: space-between; /* This separates the logo and the nav-links */
+    align-items: center;
+    padding: 10px 20px; /* Add some padding on the sides */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space out the links */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links-item:hover{
+    color: rgb(157, 157, 157);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 50px; /* Add space between the logo and the nav-links */
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; /* Center links horizontally */
+    align-items: center; /* Center links vertically */
+    flex-grow: 1; /* Allows nav-links to take up the available space */
+}
+.nav-container .logo {
+    color: white;
+}
+
+
 
 .signup-container {
     max-width: 400px;
@@ -15,39 +95,65 @@ body {
 }
 
 .signup-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 100%;
+    margin: 700px auto 30px; 
+    position: relative; 
+}
+
+.form-control {
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
 }
 
-.form-control {
-    margin-bottom: 10px;
-}
-
 .form-control label {
-    display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .form-control input[type="text"],
+.form-control input[type="email"],
 .form-control input[type="password"],
-.form-control input[type="email"] {
-    width: 100%;
+.form-control input[type="tel"],
+.form-control input[type="number"],
+.form-control select {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-.signup-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #5cb85c;
-    color: white;
+/* Specific to Select Dropdown */
+.form-control select {
     cursor: pointer;
 }
 
+/* Button Styling */
+.signup-button {
+    background-color: #0066ff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
 .signup-button:hover {
-    background-color: #4cae4c;
+    background-color: #0056e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signup-form {
+        width: 90%;
+        padding: 15px;
+    }
 }
 
 .links {
