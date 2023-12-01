@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils import timezone
+# Create your models here.
 class Label(models.Model):
     label_id = models.IntegerField(primary_key=True)
     label = models.CharField(max_length=50, blank=True, null=True)
@@ -299,7 +301,7 @@ class Useraddress(models.Model):
     address1 = models.CharField(max_length=50, blank=True, null=True)
     address2 = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
-    state = models.CharField(max_length=10, blank=True, null=True)
+    state = models.CharField(max_length=30, blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -307,8 +309,32 @@ class Useraddress(models.Model):
         db_table = 'userAddress'
 
 
-class Users(models.Model):
-    user_id = models.IntegerField(primary_key=True)
+
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, user_email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        user_email = self.normalize_email(email)
+        user = self.model(user_email=user_email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, user_email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(user_email, password, **extra_fields)
+
+class Users(AbstractBaseUser, PermissionsMixin):
+    user_id = models.AutoField(primary_key=True)
+    user_email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50, blank=True, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
@@ -316,16 +342,26 @@ class Users(models.Model):
     user_gender = models.CharField(max_length=10, blank=True, null=True)
     user_address = models.ForeignKey(Useraddress, models.DO_NOTHING, db_column='user_address', blank=True, null=True)
     user_phone = models.CharField(max_length=50, blank=True, null=True)
-    user_email = models.CharField(max_length=100, blank=True, null=True)
     user_account = models.CharField(max_length=50, blank=True, null=True)
-    passward = models.CharField(max_length=50, blank=True, null=True)
-    create_datetime = models.DateTimeField(blank=True, null=True)
+    password = models.CharField(max_length=50, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    create_datetime = models.DateTimeField(default=timezone.now)
     delete_datetime = models.DateTimeField(blank=True, null=True)
-    is_delete = models.IntegerField(blank=True, null=True)
+    last_login = models.DateTimeField(('last login'), blank=True, null=True)
+
+    is_delete = models.BooleanField(default=False)
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'user_email'
+    REQUIRED_FIELDS = []
 
     class Meta:
-        managed = False
         db_table = 'users'
+
+    def __str__(self):
+        return self.user_email
 
 # A Test table used for testing
 class Test(models.Model):
