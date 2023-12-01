@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Real Estate Website</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 <body>
@@ -12,8 +12,8 @@
             <div class="nav-container">
                 <div class="logo">HOUSEBOOK</div>
                 <ul class="nav-links">
-                    <li><a href="/" class="nav-links-item">HOME</a></li>
-                    <li><a href="#" class="nav-links-item">ABOUT US</a></li>
+                    <!-- <li><a href="/" class="nav-links-item">HOME</a></li> -->
+                    <li><a href="/ourTeam/" class="nav-links-item">ABOUT US</a></li>
                     <li><a href="/dashboard/" class="nav-links-item">MY DASHBOARD</a></li>
                     <li><a href="/login/" class="nav-links-item">LOGIN</a></li>
                     <!-- Add other navigation links here -->
@@ -45,13 +45,19 @@
           </div>
           <div class="dashboard-card-content-property">
             {% with property.propertyitem_set.first as first_item %}
-              <!-- Displaying the address details -->
-              <p>Property Name: {{ property.property_name }}</p>
-              <p>Property Type: {{ property.property_type }}</p>
-              <p>Address: {{ first_item.address.address1 }}</p>
-              <p>City: {{ first_item.address.city }}</p>
-              <p>State: {{ first_item.address.state }}</p>
-              {% endwith %}
+              {% if first_item %}
+                <!-- Displaying the address details -->
+                <p>Property Name: {{ property.property_name }}</p>
+                <p>Property Type: {{ property.property_type }}</p>
+                <p>Item Type: {{ first_item.item_type }}</p>
+                <p>Bedroom: {{ first_item.item_bedroom }}</p> <!-- Corrected line -->
+                <p>Bathroom: {{ first_item.item_bathroom }}</p> <!-- Corrected line -->
+                <p>Address: {{ first_item.address.address1 }}</p>
+                <p>City: {{ first_item.address.city }}</p>
+                <p>State: {{ first_item.address.state }}</p>
+                <p>Zip: {{ first_item.address.zipcode }}</p>
+              {% endif %}
+            {% endwith %}
           </div>
       </div>
       {% endfor %}

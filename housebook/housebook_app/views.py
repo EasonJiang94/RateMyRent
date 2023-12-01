@@ -41,7 +41,15 @@ def housebook_app(request):
     )
     
     # Retrieve table that Property inner join Propertyitem
-    property_items = Propertyitem.objects.select_related('property').all()[:3]
+    property_items = Property.objects.prefetch_related(
+        Prefetch(
+            'propertyitem_set',
+            queryset=Propertyitem.objects.prefetch_related('propertyitemimages_set'),
+            to_attr='filtered_propertyitems'
+        ),
+        'propertyitem_set__address'
+    ).all()[:3]
+
 
     template = loader.get_template('index.html')
     context = {
@@ -49,7 +57,6 @@ def housebook_app(request):
     'property_items':property_items,
   }
     return HttpResponse(template.render(context, request))
-
 def property_details(request, argument):
     # receive argument from template
     # find a property that fit property_id=argument from template
@@ -62,21 +69,26 @@ def property_details(request, argument):
     # get propertyitem's item_id
     item_ids = Propertyitem.objects.filter(property__property_id=F('property')).values_list('item_id', flat=True)
 
-    # get Propertyitemimages
-    # First, we create a queryset for the subquery
-    subquery = Propertyitem.objects.filter(
-        property__property_id=F('property')  # This assumes `property` is a ForeignKey to Property
-    ).values('item_id')
-    # Now, we use that subquery within the __in lookup for the main query
-    property_item_images = Propertyitemimages.objects.filter(
-        item_id__in=Subquery(subquery)
-    )
+    # join Property, Propertyitem, Propertyitemimages
+    # property_item_images = Propertyitemimages.objects.select_related('item__property').all()
+
+    property_item_images = Propertyitemimages.objects.filter(item__item_id=argument).select_related('item__property')
+
+    properties = Property.objects.prefetch_related(
+        Prefetch(
+            'propertyitem_set',
+            queryset=Propertyitem.objects.filter(item_id=argument).prefetch_related('propertyitemimages_set'),
+            to_attr='filtered_propertyitems'
+        ),
+        'propertyitem_set__address'
+    ).all()
 
     context = {
         'property':p,
         'property_item':p_item,
         'property_address':p_address,
         'property_item_images':property_item_images,
+        'properties':properties,
     }
     
     return render(request, 'property_details.html', context)
@@ -164,7 +176,7 @@ def dashboard(request):
         ),
         'propertyitem_set__address'
     ).all()
-    time.sleep(0.001)
+    time.sleep(0.001) # wait for the sql database loading
     # for property in properties:
     #     print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
     #     for item in property.propertyitem_set.all():
@@ -197,11 +209,16 @@ def add_property(request):
     else:
         return render(request, 'add_property.html')
     
+
 def edit_property(request, property_id):
+    #print(f"Item Id: {propertyitem_data.item_id}, Property ID: {propertyitem_data.property_id}, Address Id: {propertyitem_data.address_id}")
 
     property_data = Property.objects.get(property_id=property_id)
+    propertyitem_data = Propertyitem.objects.get(property_id=property_id)
+    propertyaddress_data =  Propertyaddress.objects.get(address_id=propertyitem_data.address_id)
 
     if request.method == 'POST':
+        #print(request.POST.keys())
         property_data = Property(
             property_id=request.POST['property_id'],
             property_name=request.POST['property_name'],
@@ -210,12 +227,35 @@ def edit_property(request, property_id):
             city=request.POST['city'],
             state=request.POST['state'],
         )
-        property_data.save()  # Save the new Property to the database
+        property_data.save()  # Edit Property
+
+        propertyitem_data = Propertyitem(
+            item_id=request.POST['item_id'],
+            property_id=request.POST['property_id'],
+            address_id=request.POST['address_id'],
+            item_type=request.POST['item_type'],
+            capacity=request.POST['capacity'],
+            item_bedroom=request.POST['item_bedroom'],
+            item_bathroom=request.POST['item_bathroom'],
+        )
+        propertyitem_data.save()  # Edit Propertyitem
+
+        propertyaddress_data = Propertyaddress(
+            address_id=request.POST['address_id'],
+            address1=request.POST['address1'],
+            address2=request.POST['address2'],
+            city=request.POST['city'],
+            zipcode=request.POST['zipcode'],
+            state=request.POST['state'],
+        )
+        propertyaddress_data.save()  # Edit Propertyaddress
 
         return redirect('dashboard')
     
     context = {
-        'property':property_data,
+        'property': property_data,
+        'propertyitem': propertyitem_data,
+        'propertyaddress': propertyaddress_data,
     }
             
     return render(request, 'edit_property.html' , context)
@@ -240,4 +280,12 @@ def delete_property(request, property_id):
             # Finally, delete the Property
             property_to_delete.delete()
 
+
         return redirect(reverse('dashboard'))  # Redirect to the list of properties
+    
+def ourTeam(request):   
+    team_list = Users.objects.raw('''select * from users u inner join administrator a on u.user_id=a.user_id left join userPhoto up on u.user_id=up.user_id where u.user_role=\'ADMIN\'''')
+    #imgUrl=os.path.join(settings.MEDIA_URL, 'Users', photo)
+    return render(request, 'ourTeam.html', { 'team_list': team_list })
+    #return HttpResponse(template.render(context, request))
+
