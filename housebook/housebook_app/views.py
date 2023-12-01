@@ -10,19 +10,20 @@ from .models import Propertyaddress
 from .models import Propertyitem
 from .models import Propertyitemimages
 from .models import Property, Propertyitem, Propertyitemfeatures2, Propertyitemimages, Propertyitemlabel, Propertyitempayment, Property, Transactions
+from .models import Users, Useraddress
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-<<<<<<< HEAD
 from django.db.models import Count
-<<<<<<< HEAD
 from .forms import LoginForm
-=======
 from .models import Property
->>>>>>> dev
-=======
 from django.db.models import Count, Prefetch
 from django.db import transaction
->>>>>>> dev
+from django.contrib import messages
+from .utils import generate_uid
+from django.contrib.auth import authenticate, login
+
+import time
+
 
 def housebook_app(request):
     # Return the salesman's names, email and transaction count. Order by transaction count.
@@ -81,22 +82,79 @@ def property_details(request, argument):
     return render(request, 'property_details.html', context)
 
 
-def dashboard(request):
-<<<<<<< HEAD
-    template = loader.get_template('dashboard.html')
-    return HttpResponse(template.render())
-<<<<<<< HEAD
+
     
 def login(request):
-    template = loader.get_template('login.html')
-    return HttpResponse(template.render())
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # success
+            return redirect('home')  # update
+        else:
+            # fail
+            messages.error(request, 'Invalid username or password.')
+
+    return render(request, 'login.html')
 
 def signup(request):
-    template = loader.get_template('signup.html')
-    return HttpResponse(template.render())
-=======
-=======
+    if request.method == 'POST':
+        print("======in Post====")
+        # receive data of the form
+        first_name = request.POST.get('first_name')
+        middle_name = request.POST.get('middle_name', '')
+        last_name = request.POST.get('last_name')
+        organization_name = request.POST.get('organization_name', '')
+        user_gender = request.POST.get('user_gender')
+        user_phone = request.POST.get('user_phone')
+        user_email = request.POST.get('user_email')
+        user_account = request.POST.get('user_account')
+        password = request.POST.get('password')
 
+        # address data
+        address1 = request.POST.get('address1')
+        address2 = request.POST.get('address2', '')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zipcode = request.POST.get('zipcode')
+
+        # create Useraddress instance
+        user_address = Useraddress(
+            address_id = generate_uid(),
+            address1=address1,
+            address2=address2,
+            city=city,
+            state=state,
+            zipcode=zipcode
+        )
+        user_address.save()
+
+        # create Users instance
+        user = Users(
+            user_id=generate_uid(),
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            organization_name=organization_name,
+            user_gender=user_gender,
+            user_address=user_address,
+            user_phone=user_phone,
+            user_email=user_email,
+            user_account=user_account,
+            password=password
+        )
+        user.save()
+
+        
+        messages.success(request, 'Account created successfully')
+        return redirect('login') 
+
+    return render(request, 'signup.html')
+
+def dashboard(request):
     #property_data = Property.objects.select_related('itme_id')
 
     properties = Property.objects.prefetch_related(
@@ -106,21 +164,20 @@ def signup(request):
         ),
         'propertyitem_set__address'
     ).all()
-
-    for property in properties:
-        print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
-        for item in property.propertyitem_set.all():
-            print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
-            print(f"  Address: {item.address.address1}, {item.address.city}")
-            for image in item.propertyitemimages_set.all():
-                print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
+    time.sleep(0.001)
+    # for property in properties:
+    #     print(f"Property Id: {property.property_id}, Property Name: {property.property_name}, Type: {property.property_type}")
+    #     for item in property.propertyitem_set.all():
+    #         print(f"  Item Type: {item.item_type}, Bedrooms: {item.item_bedroom}, Bathrooms: {item.item_bathroom}")
+    #         print(f"  Address: {item.address.address1}, {item.address.city}")
+    #         for image in item.propertyitemimages_set.all():
+    #             print(f"    Image ID: {image.image_id}, Image Path: {image.image}")
 
     context = {
         'properties': properties,
     }
     
     return render(request, 'dashboard.html', context)
->>>>>>> dev
 
 
 
@@ -183,8 +240,4 @@ def delete_property(request, property_id):
             # Finally, delete the Property
             property_to_delete.delete()
 
-<<<<<<< HEAD
->>>>>>> dev
-=======
         return redirect(reverse('dashboard'))  # Redirect to the list of properties
->>>>>>> dev

@@ -1,3 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, h1, p {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Full screen body and html to make sure the hero image covers full screen */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background: #f4f4f4;
@@ -8,13 +28,98 @@ body {
     align-items: center;
     height: 100vh;
 }
+.navbar {
+    background-color: rgb(25, 53, 123);
+    color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.nav-container {
+    color: white;
+    display: flex;
+    justify-content: space-between; /* This separates the logo and the nav-links */
+    align-items: center;
+    padding: 10px 20px; /* Add some padding on the sides */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space out the links */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links-item:hover{
+    color: rgb(157, 157, 157);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 50px; /* Add space between the logo and the nav-links */
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center; /* Center links horizontally */
+    align-items: center; /* Center links vertically */
+    flex-grow: 1; /* Allows nav-links to take up the available space */
+}
+.nav-container .logo {
+    color: white;
+}
+
+.message-container{
+    display: flex;
+    flex-direction: row;
+    border: black;
+}
+
+.messages {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.messages {
+    max-width: 300px; /* 與 .login-container 相同 */
+    margin: 20px auto; /* 上下邊距為 20px，左右為 auto 進行居中 */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.message.success {
+    color: #28a745;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.message.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
 
 .login-container {
-    background: #fff;
+    max-width: 300px; /* 為了確保與消息容器寬度相同 */
+    margin: 0 auto; /* 水平居中 */
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background: #fff;
 }
 
 .login-form {
@@ -71,6 +176,7 @@ body {
 .links a:hover {
     text-decoration: underline;
 }
+
 
 @media (max-width: 768px) {
     .login-container {
