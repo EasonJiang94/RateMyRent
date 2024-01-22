@@ -1,4 +1,5 @@
 # RateMyRent
+It is a final project of Database Management in University of Pittsburgh, 2023
 ## Files : 
 [Meeting Document](https://docs.google.com/document/d/1vlk1mottYMlSErFy5jw6XkFr3GL9b7EKUiC7yKRR5HQ/edit?usp=sharing)
 
